@@ -29,13 +29,13 @@ class GitHub_lib {
      * @return	object - an object with all the repository's issues
      */
     public function project_issues($user = '', $repo = '', $state = 'open') {
-        $responce = $this->_fetch_data('http://github.com/api/v2/json/issues/list/' . $user . '/' . $repo . '/' . $state);
+        $responce = $this->_fetch_data('https://api.github.com/repos/' . $user . '/' . $repo . '/issues');
 
-        if (empty($responce->issues)) {
+        if (empty($responce)) {
             return FALSE;
         }
 
-        return $responce->issues;
+        return $responce;
     }
 
     /**
@@ -47,13 +47,13 @@ class GitHub_lib {
      * @return	object - an object with all the repository's info
      */
     public function repo_info($user = '', $repo = '') {
-        $responce = $this->_fetch_data('http://github.com/api/v2/json/repos/show/' . $user . '/' . $repo);
+        $responce = $this->_fetch_data('https://api.github.com/repos/' . $user . '/' . $repo);
 
-        if (empty($responce->repository)) {
+        if (empty($responce)) {
             return FALSE;
         }
 
-        return $responce->repository;
+        return $responce;
     }
 
     /**
@@ -65,32 +65,13 @@ class GitHub_lib {
      * @return	object - an object with all the repository's collaborators
      */
     public function repo_collaborators($user = '', $repo = '') {
-        $responce = $this->_fetch_data('http://github.com/api/v2/json/repos/show/' . $user . '/' . $repo . '/collaborators');
+        $responce = $this->_fetch_data('https://api.github.com/repos/' . $user . '/' . $repo . '/collaborators');
 
-        if (empty($responce->collaborators)) {
+        if (empty($responce)) {
             return FALSE;
         }
 
-        return $responce->collaborators;
-    }
-
-    /**
-     * Grab all refs for a specific repository
-     * 
-     * @access	public
-     * @param	string - a GitHub user
-     * @param	string - a repository name
-     * @param	string - the repository reference to pull (tags/branches)
-     * @return	object - an object with all the repository's references
-     */
-    public function repo_refs($user = '', $repo = '', $ref = 'tags') {
-        $responce = $this->_fetch_data('http://github.com/api/v2/json/repos/show/' . $user . '/' . $repo . '/' . $ref);
-
-        if (empty($responce->$ref)) {
-            return FALSE;
-        }
-
-        return $responce->$ref;
+        return $responce;
     }
 
     /**
@@ -101,13 +82,13 @@ class GitHub_lib {
      * @return	object - an object with all the user's info
      */
     public function user_info($user = '') {
-        $responce = $this->_fetch_data('http://github.com/api/v2/json/user/show/' . $user);
+        $responce = $this->_fetch_data('https://api.github.com/users/' . $user);
 
-        if (empty($responce->user)) {
+        if (empty($responce)) {
             return FALSE;
         }
 
-        return $responce->user;
+        return $responce;
     }
     
     /*
@@ -135,12 +116,12 @@ class GitHub_lib {
      * @return	object - an object with all the user's repos info
      */
     public function user_repos($user = '') {
-        $response = $this->_fetch_data('http://github.com/api/v2/json/repos/show/' . $user . '/');
-        if (empty($response->repositories)) {
+        $response = $this->_fetch_data('https://api.github.com/users/'.$user.'/repos');
+        if (empty($response)) {
             return FALSE;
         }
 
-        return $response->repositories;
+        return $response;
     }
 
     
@@ -155,43 +136,13 @@ class GitHub_lib {
      * @return	object - an object with all the branch's commits
      */
     public function user_timeline($user = '', $repo = '', $branch = 'master') {
-        $responce = $this->_fetch_data('http://github.com/api/v2/json/commits/list/' . $user . '/' . $repo . '/' . $branch);
+        $responce = $this->_fetch_data('https://api.github.com/repos/' . $user . '/' . $repo . '/commits');
 
-        if (empty($responce->commits)) {
+        if (empty($responce)) {
             return FALSE;
         }
 
-        return $responce->commits;
-    }
-
-    /**
-     * Search GitHub
-     * 
-     * @access	public
-     * @param	string - the term to search for
-     * @param	string - the language
-     * @return	array  - an array with all the search results
-     */
-    public function search($term = '', $language = NULL) {
-        if (!empty($language) && is_string($language)) {
-            $language = strtolower($language);
-        }
-
-        $responce = $this->_fetch_data('http://github.com/api/v1/json/search/' . $term);
-
-        if (empty($responce->repositories) or !is_array($responce->repositories)) {
-            return FALSE;
-        }
-
-        $results = array();
-
-        foreach ($responce->repositories as &$result) {
-            if ($language != strtolower($result->language))
-                continue;
-            $results[] = $result;
-        }
-
-        return $results;
+        return $responce;
     }
 
     /**

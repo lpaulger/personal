@@ -22,7 +22,7 @@ class Welcome extends CI_Controller {
         $users = $this->github_lib->repo_collaborators($this->config->item('default_team'), $this->config->item('default_project'));
 
         foreach ($users AS $user) {
-            $user_info = $this->github_lib->user_info($user);
+            $user_info = $this->github_lib->user_info($user->login);
             $user_info->imageLarge = "http://www.gravatar.com/avatar/" . $user_info->gravatar_id . "/?s=120&d=" . site_url();
             $user_info->image = "http://www.gravatar.com/avatar/" . $user_info->gravatar_id . "/?s=48&d=" . site_url();
             array_push($data['users'], $user_info);
@@ -36,7 +36,7 @@ class Welcome extends CI_Controller {
         $count = 1;
         foreach ($merged_projects as $project) {
             //TODO: implement v3 - this is a fix for v2
-            $project->url = "/api/project/user/" . $project->owner . "/project/" . $project->name;
+            $project->url = "/api/project/user/" . $project->owner->login . "/project/" . $project->name;
             if (in_array($project->name, $this->config->item('github_projects'))) {
                 $proj = new ProjectModel($count, $project->homepage, $project->url, $project->name, $project->created_at, $project->pushed_at, $project->language, $project->owner);
                 array_push($projects, $proj);
