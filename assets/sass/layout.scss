@@ -1,0 +1,165 @@
+/* Body and structure
+-------------------------------------------------- */
+
+@import "compass/css3";
+
+@import "compass/utilities";
+
+body {
+    position: relative;
+    background-color: #fff;
+    background-image: url(../img/linen_bg_tile.jpg);
+    
+    background-position: 0 40px;
+}
+
+#contentContainer .hero-unit{
+    padding:20px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.clear-both{
+    clear:both;
+}
+
+.spacer-top{
+    padding-top: 55px;
+}
+
+.user-item{
+    float:left;
+    padding:5px;
+    h3{
+        text-align:center;
+    }
+    
+    img{
+        margin-left: auto;
+        margin-right: auto;
+        min-width:100%;
+    }
+}
+
+.user-details{
+    label{
+        font-weight:bold;
+        
+    }
+    span{
+        
+    }
+    img{
+        float: left;
+        padding-right:5px;
+    }
+}
+
+
+.post-item{
+    @include border-radius(10px);
+    padding:10px;
+    margin-bottom:5px;
+    img{
+        float: left;
+        clear:left;
+    }
+    .accordion-toggle{
+        float:left;
+    }
+    
+    h4{
+        max-width: 140px;
+        word-wrap: break-word;
+    }
+    
+    p{
+        clear:left; 
+    }
+    .badge{
+        float:left;
+        margin-bottom:5px;
+    }
+    
+    .post-time{
+        float: right;
+        clear:right;
+    }
+    
+    .accordion-heading{
+        p{
+            word-wrap: break-word;
+        }
+    }
+}
+
+.item{
+    max-height:400px;
+    overflow: hidden;
+    
+    img{
+        width:100%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+}
+
+#Hobbies, #History{
+    li{
+        list-style:none;
+        
+        .thumbnail-container{
+            display: inline;
+            height:75px;
+            float: left;
+            padding: 5px;
+            img{
+                height:75px;
+            }
+        }
+    }
+}
+
+#socialMedia{
+    margin-top: 15px;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    min-width: 300px;
+    
+    .soialMedia-inner{
+        
+        h3{
+            float:left;
+            height: 50px;
+            line-height: 55px;
+        }
+        
+        list-style:none;
+        a{
+            float:left;
+            margin-left:auto;
+            margin-right:auto;
+            width:25%;
+            img{
+                height:50px;
+                width: 50px;
+                padding:5px;
+            }
+        }
+    }
+}
+
+#contact_form{
+    input, textarea, button{
+        margin:3px;
+    }
+}
+    
+.contentList-inner{
+    max-height: 1420px;
+    overflow-y: scroll;
+    padding:0 20px;
+  
+}

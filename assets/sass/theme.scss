@@ -1,0 +1,59 @@
+/* Theme
+-------------------------------------------------- */
+
+$default-text-shadow-color: rgba(white, 0.6);
+$default-text-shadow-blur: 3px;
+$default-text-shadow-v-offset: 1px;
+
+@import "compass/css3";
+
+@import "compass/utilities";
+
+$primary-color: #B9121B;
+$secondary-color: #002F2F;
+$background-color: #E1E1E1;
+$secondary-background-color: #FCFAE1;
+
+a{
+    color: $primary-color;
+    &:hover, &:visited{
+        color: darken($primary-color, 15%);
+    }
+}
+
+h2, h3, legend{
+    color: invert(#333);
+}
+
+#sidebarList li a{
+    background-color: $background-color;
+    &:hover{
+        background-color: darken($background-color, 15%);
+    }
+}
+.post-item{
+    background-color: $background-color;
+    @include box-shadow(black 2px 2px 10px); 
+}
+
+.navbar{
+    a{
+        cursor: pointer;
+        }
+    .brand{
+        
+    }
+    .navbar-inner{
+
+        @include  background-image(linear-gradient($primary-color, darken($primary-color, 10%) 30%, darken($primary-color, 15%) 70%, darken($primary-color, 20%)));               
+    }
+}
+
+#subContent{
+    .accordion-heading{
+        background-color: #999;
+    }
+    .accordion-body{
+       background-color: $background-color; 
+    }
+}
