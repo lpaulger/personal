@@ -116,7 +116,7 @@ class Api extends REST_Controller {
         $users = $this->github_lib->repo_collaborators($this->get('user'), $this->get('project'));
 
         foreach ($users AS $user) {
-            $user_info = $this->github_lib->user_info($user);
+            $user_info = $this->github_lib->user_info($user->login);
             $user_info->image = "http://www.gravatar.com/avatar/" . $user_info->gravatar_id . "/?s=48&d=" . site_url();
             array_push($data['users'], $user_info);
         }
@@ -137,9 +137,9 @@ class Api extends REST_Controller {
                     break;
                 }
             }
-            $timestamp = strtotime($commit->committed_date);
+            $timestamp = strtotime($commit->commit->committer->date);
             $iso8601 = date('c', $timestamp);
-            $post = new PostModel($commit->committer->name, $timestamp, $iso8601, "Github", $user->image, $commit->message);
+            $post = new PostModel($commit->committer->login, $timestamp, $iso8601, "Github", $user->image, $commit->commit->message);
             array_push($posts_array, $post);
         }
         

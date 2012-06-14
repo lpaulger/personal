@@ -52,7 +52,7 @@ var AppRouter = Backbone.Router.extend({
         var Repo = Repos.get(id);
         var RepoPosts = new PostCollection;
 
-        RepoPosts.url =  "/api/projectCommits/user/" + Repo.get('owner') + "/project/" + Repo.get('name');
+        RepoPosts.url =  "/api/projectCommits/user/" + Repo.get('owner').login + "/project/" + Repo.get('name');
         RepoPosts.fetch({
             success: function(){
                 commitsView = new PostListView({
