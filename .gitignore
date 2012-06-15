@@ -6,3 +6,7 @@ application/config/app_config.php
 assets/.sass-cache
 
 system
+
+personal.sublime-project
+
+personal.sublime-workspace
